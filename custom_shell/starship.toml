@@ -6,9 +6,11 @@ format = ' [\[$symbol($version)\]]($style)'
 
 [c]
 format = ' [\[$symbol($version(-$name))\]]($style)'
+detect_extensions = ['c', 'h', 'cpp', 'hpp']
 
 [cmake]
 format = ' [\[$symbol($version)\]]($style)'
+detect_files = ['CMakeLists.txt']
 
 [cmd_duration]
 format = ' [\[⏱ $duration\]]($style)'
@@ -215,7 +217,7 @@ error_symbol = '[✗](bold red)'
 
 [directory]
 read_only = '[🔒]'
-format = ' in [$path](bold yellow)[$read_only](red)'
+format = ' in [$path via](bold yellow)[$read_only](red)'
 
 [directory.substitutions]
 "Documents" = "󰈙"
