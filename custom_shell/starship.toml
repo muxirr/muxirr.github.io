@@ -217,7 +217,7 @@ error_symbol = '[✗](bold red)'
 
 [directory]
 read_only = '[🔒]'
-format = ' in [$path via](bold yellow)[$read_only](red)'
+format = ' in [$path](bold yellow)[$read_only](red)'
 
 [directory.substitutions]
 "Documents" = "󰈙"
