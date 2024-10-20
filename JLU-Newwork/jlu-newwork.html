@@ -1,39 +1,59 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+	<head>
+		<meta charset="GBK" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>JLU-Network</title>
+	</head>
 
-<head>
-    <meta charset="GBK">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JLU-Network</title>
-</head>
+	<body>
+		<div>
+			<h2>1.download dogcom and compile</h2>
+			<p>
+				git clone
+				<a href="https://github.com/mchome/dogcom"
+					>https://github.com/mchome/dogcom.git</a
+				>
+			</p>
+			<p>
+				$ make # Linux<br />
+				$ make win32=y # Windows(MinGW)<br />
+				$ make test=y # For testing purposes<br />
+				$ make force_encrypt=y # Force open encrypt mode in PPPoE
+				version
+			</p>
+		</div>
 
-<body>
-    <div>
-        <h2>1.download dogcom and compile</h2>
-        <p>git clone <a href="https://github.com/mchome/dogcom">https://github.com/mchome/dogcom.git</a></p>
-        <p>$ make # Linux<br>
-            $ make win32=y # Windows(MinGW)<br>
-            $ make test=y # For testing purposes<br>
-            $ make force_encrypt=y # Force open encrypt mode in PPPoE version</p>
-    </div>
+		<div>
+			<h2>2.config dogcom.conf</h2>
+			<p>
+				you can use
+				<a href="dogcom.example.conf" download>dogcom.example.conf</a>
+				to generate you profile
+			</p>
+			<p>
+				Then you should change the blank var in file, usually you should
+				fill in your username,passward,ip and your device's MAC address.
+			</p>
+			<p>
+				If you finish changing the blank var in file, then change the
+				file name to dogcom.conf and move it to the directory of dogcom
+			</p>
+			<p>
+				ps:If you are a student from JLU , the server in conf file is
+				right.Other school's student shuld change it to your shool's
+				server.
+			</p>
+		</div>
 
-    <div>
-        <h2>2.config dogcom.conf</h2>
-        <p>you can use <a href="dogcom.example.conf" download>dogcom.example.conf</a> to generate you profile</p>
-        <p>Then you should change the blank var in file, usually you should fill in your username,passward,ip and your
-            device's MAC address.</p>
-        <p>If you finish changing the blank var in file, then change the file name to dogcom.conf and move it to the
-            directory of dogcom </p>
-        <p>ps:If you are a student from JLU , the server in conf file is right.Other school's student shuld change it to
-            your shool's server.</p>
-    </div>
-
-    <div>
-        <h2>3.run dogcom</h2>
-        <p>you can run dogcom by powershell</p>
-        <p>here is command: dogcom.exe -m dhcp -l path-to-dogcom/dogcom.log -c path-to-dogcom/dogcom.conf</p>
-    </div>
-
-</body>
-
+		<div>
+			<h2>3.run dogcom</h2>
+			<p>you can run dogcom by powershell</p>
+			<p>
+				here is command: dogcom.exe -m dhcp -l path-to-dogcom/dogcom.log
+				-c path-to-dogcom/dogcom.conf
+				<a herf="dogcom-jlu.ps1" download="">example script file</a>
+			</p>
+		</div>
+	</body>
 </html>
