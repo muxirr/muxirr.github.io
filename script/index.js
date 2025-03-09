@@ -22,6 +22,7 @@ window.onload = function () {
 
 function load(name) {
 	let res = "../source/" + name + ".html";
+	document.body.style.display = "none";
 
 	fetch(res)
 		.then((response) => response.text()) // 获取 HTML 内容
@@ -35,9 +36,13 @@ function load(name) {
 
 			content.innerHTML = data; // 插入新内容
 			change_title(name);
+
+			setTimeout(() => {
+				document.body.style.display = "block";
+			}, 100);
 		})
 		.catch((error) => {
-			console.error("加载 HTML 失败:", error);
+			console.error(error);
 		});
 }
 
@@ -47,6 +52,18 @@ function change_title(name) {
 			return title_map;
 		}
 	}).title;
+}
+
+function switch_sidebar() {
+	let sidebar = document.querySelector(".sidebar");
+
+	if (sidebar.style.left === "0px") {
+		document.querySelector(".container").style.left = "36px";
+		sidebar.style.left = "-220px";
+	} else {
+		document.querySelector(".container").style.left = "256px";
+		sidebar.style.left = "0px";
+	}
 }
 
 let title_map = [
