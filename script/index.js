@@ -1,19 +1,17 @@
 window.onload = function () {
-	document.querySelector(".container").style.display = "none";
-	// 检查 localStorage 是否有保存的内容
+	if (!sessionStorage.getItem("pageContent")) {
+		load("home");
+		return;
+	}
+
 	let page = JSON.parse(sessionStorage.getItem("pageContent")).data;
 
-	if (page) {
-		document.getElementsByClassName("container")[0].innerHTML = page; // 恢复保存的 HTML 内容
-	} else {
-		load("home"); // 默认加载页面
-	}
-	document.querySelector(".container").style.display = "block";
+	document.getElementsByClassName("container")[0].innerHTML = page; // 恢复保存的 HTML 内容
 	change_title(JSON.parse(sessionStorage.getItem("pageContent")).name);
 };
 
 function load(name) {
-	let res = "./source/" + name + ".html";
+	let res = "../source/" + name + ".html";
 
 	fetch(res)
 		.then((response) => response.text()) // 获取 HTML 内容
