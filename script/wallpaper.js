@@ -39,21 +39,14 @@ function change(op) {
 		return "Op Code Error";
 	}
 	let imgs = document.getElementsByTagName("img")[0];
-	index = img.findIndex((img) => img.name === imgs.alt);
+	let index = img.findIndex((img) => img.name === imgs.alt);
 
 	if (index === -1) {
 		return "Image Not Found";
 	}
 
-	if (index === 0 && op === -1) {
-		index = img.length - 1;
-	} else if (index === img.length - 1 && op === 1) {
-		index = 0;
-	} else {
-		index += op;
-	}
+	index = (index + op + img.length) % img.length;
 
 	imgs.src = path + img[index].name + "." + img[index].type;
 	imgs.alt = img[index].name;
-	imgs.innerHTML = imgs;
 }
