@@ -1,66 +1,9 @@
-<!DOCTYPE html>
-<html lang="zh">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>悬浮箭头切换图片</title>
-		<style>
-			body {
-				text-align: center;
-				font-family: Arial, sans-serif;
-				background-color: black;
-			}
-			.image-container {
-				position: relative;
-				display: inline-block;
-			}
-			img {
-				width: 100%;
-				border-radius: 10px;
-				transition: opacity 0.3s ease-in-out;
-				max-height: 98vh;
-			}
-			.arrow {
-				position: absolute;
-				top: 50%;
-				transform: translateY(-50%);
-				background-color: rgba(0, 0, 0, 0.5);
-				color: white;
-				border: none;
-				font-size: 20px;
-				width: 40px;
-				height: 40px;
-				text-align: center;
-				cursor: pointer;
-				border-radius: 50%;
-				display: none; /* 默认隐藏 */
-				transition: background 0.3s;
-			}
-			.arrow:hover {
-				background-color: rgba(0, 0, 0, 0.8);
-			}
-			.left-arrow {
-				left: 5px;
-			}
-			.right-arrow {
-				right: 5px;
-			}
-			/* 鼠标悬浮时显示箭头 */
-			.image-container:hover .arrow {
-				display: block;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="image-container">
-			<img src="../asset/img/castorice.jpg" alt="castorice" />
-			<button class="arrow left-arrow" onclick="change(-1)">
-				&#9664;
-			</button>
-			<button class="arrow right-arrow" onclick="change(1)">
-				&#9654;
-			</button>
-		</div>
-		<script src="../script/wallpaper.js"></script>
-	</body>
-</html>
+<link rel="stylesheet" href="../style/wallpaper.css" />
+
+<div class="image-container">
+	<button class="arrow left-arrow" onclick="change(-1)">&#9664;</button>
+	<img src="../assets/img/castorice.jpg" alt="castorice" />
+	<button class="arrow right-arrow" onclick="change(1)">&#9654;</button>
+</div>
+
+<script src="../script/wallpaper.js"></script>

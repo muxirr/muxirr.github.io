@@ -1,4 +1,4 @@
-let path = "../asset/img/";
+let path = "../assets/img/";
 let img = [
 	{
 		name: "castorice",
@@ -35,9 +35,9 @@ let img = [
 ];
 
 function change(op) {
-	// if (op != 1 || op != -1) {
-	// 	return "Op Code Error";
-	// }
+	if (op !== 1 && op !== -1) {
+		return "Op Code Error";
+	}
 	let imgs = document.getElementsByTagName("img")[0];
 	index = img.findIndex((img) => img.name === imgs.alt);
 
