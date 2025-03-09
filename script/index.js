@@ -1,13 +1,22 @@
+// 刷新页面操作
 window.onload = function () {
+	document.body.style.display = "none";
+
 	if (!sessionStorage.getItem("pageContent")) {
-		load("home");
+		load("home").then(() => {
+			document.body.style.display = "block";
+		});
 		return;
 	}
 
 	let page = JSON.parse(sessionStorage.getItem("pageContent")).data;
 
-	document.getElementsByClassName("container")[0].innerHTML = page; // 恢复保存的 HTML 内容
+	document.getElementsByClassName("container")[0].innerHTML = page;
 	change_title(JSON.parse(sessionStorage.getItem("pageContent")).name);
+
+	setTimeout(() => {
+		document.body.style.display = "block";
+	}, 100);
 };
 
 function load(name) {
