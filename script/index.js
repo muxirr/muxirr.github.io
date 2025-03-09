@@ -1,3 +1,17 @@
+window.onload = function () {
+	document.querySelector(".container").style.display = "none";
+	// 检查 localStorage 是否有保存的内容
+	let page = JSON.parse(sessionStorage.getItem("pageContent")).data;
+
+	if (page) {
+		document.getElementsByClassName("container")[0].innerHTML = page; // 恢复保存的 HTML 内容
+	} else {
+		load("home"); // 默认加载页面
+	}
+	document.querySelector(".container").style.display = "block";
+	change_title(JSON.parse(sessionStorage.getItem("pageContent")).name);
+};
+
 function load(name) {
 	let res = "./source/" + name + ".html";
 
@@ -6,22 +20,38 @@ function load(name) {
 		.then((data) => {
 			let content = document.querySelector(".container");
 
-			sessionStorage.setItem("pageContent", data); // 保存 HTML 内容到 localStorage
+			sessionStorage.setItem(
+				"pageContent",
+				JSON.stringify({ name: name, data: data })
+			); // 保存 HTML 内容到 localStorage
 
 			content.innerHTML = data; // 插入新内容
+			change_title(name);
 		})
 		.catch((error) => {
 			console.error("加载 HTML 失败:", error);
 		});
 }
 
-window.onload = function () {
-	// 检查 localStorage 是否有保存的内容
-	let page = sessionStorage.getItem("pageContent");
+function change_title(name) {
+	document.title = title_map.find((title_map) => {
+		if (title_map.name === name) {
+			return title_map;
+		}
+	}).title;
+}
 
-	if (page) {
-		document.getElementsByClassName("container")[0].innerHTML = page; // 恢复保存的 HTML 内容
-	} else {
-		load("home"); // 默认加载页面
-	}
-};
+let title_map = [
+	{
+		name: "wallpaper",
+		title: "壁纸",
+	},
+	{
+		name: "jlu_network",
+		title: "校园网配置",
+	},
+	{
+		name: "home",
+		title: "Muxirr",
+	},
+];
