@@ -49,4 +49,12 @@ function change(op) {
 
 	imgs.src = path + img[index].name + "." + img[index].type;
 	imgs.alt = img[index].name;
+
+	sessionStorage.setItem(
+		"pageContent",
+		JSON.stringify({
+			name: "wallpaper",
+			data: document.querySelector(".container").innerHTML,
+		})
+	);
 }
