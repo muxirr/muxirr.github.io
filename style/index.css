@@ -62,10 +62,10 @@ body {
 /* 创建一个小小的悬停提示条 */
 .sidebar-handle {
 	position: absolute;
-	top: 50%;
+	top: 30%;
 	right: -20px;
 	width: 20px;
-	height: 100px;
+	height: 10%;
 	background-color: #333;
 	border-radius: 0 5px 5px 0;
 }
