@@ -4,7 +4,6 @@ window.onload = function () {
 
 	if (!sessionStorage.getItem("pageContent")) {
 		load("home");
-		document.body.style.display = "block";
 		setTimeout(() => {
 			document.body.style.display = "block";
 		}, 100);
