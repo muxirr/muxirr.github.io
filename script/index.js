@@ -1,23 +1,12 @@
 // 刷新页面操作
 window.onload = function () {
   document.body.style.display = "none";
-
-  if (!sessionStorage.getItem("page")) {
+  const page = sessionStorage.getItem("page");
+  if (page.name === undefined || page.type === undefined) {
     load("home", "html");
-    setTimeout(() => {
-      document.body.style.display = "block";
-    }, 100);
-    return;
+  } else {
+    load(page.name, page.type);
   }
-
-  let page = JSON.parse(sessionStorage.getItem("page")).data;
-
-  document.getElementsByClassName("container")[0].innerHTML = page;
-  change_title(JSON.parse(sessionStorage.getItem("page")).name);
-
-  setTimeout(() => {
-    document.body.style.display = "block";
-  }, 100);
 };
 
 function load(name, type) {
@@ -36,19 +25,21 @@ function load(name, type) {
         data =
           '<div class="container-md">' +
           marked.parse(data) +
-          '</div class="container-md">'; // 解析 Markdown
-        console.log(data);
+          '</div class="container-md">';
       }
 
       content.innerHTML = data;
+
+      sessionStorage.setItem(
+        "page",
+        JSON.stringify({ name: name, type: type }),
+      );
+
       if (type === "md") {
         add_button();
       }
-      sessionStorage.setItem(
-        "page",
-        JSON.stringify({ name: name, data: content.innerHTML, type: type }),
-      );
       change_title(name);
+
       setTimeout(() => {
         document.body.style.display = "block";
       }, 100);

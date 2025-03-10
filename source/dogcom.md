@@ -19,6 +19,8 @@ scoop install mingw
 
 Linux 用户可以直接编译，某些发行版可直接安装。
 
+不想编译可以直接下载[Windows 版](../assets/exe/dogcom.exe) | [Linux 版](../assets/exe/dogcom)
+
 # 2. 配置文件
 
 你可以使用 [dogcom.example.conf](../assets/config/dogcom.example.conf) 作为模板，或复制以下内容到一个新文件：

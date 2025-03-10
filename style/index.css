@@ -44,11 +44,11 @@ body {
   margin: 0;
   padding: 0;
   color: #333;
+  min-height: 100vh;
   background-image: url("../assets/img/castorice.jpg"); /* 替换为你的图片路径 */
   background-size: cover; /* 背景图片自适应屏幕大小 */
   background-position: center; /* 背景图片居中显示 */
   background-repeat: no-repeat; /* 不重复显示背景图片 */
-  height: 100vh;
 }
 
 /* 侧边导航栏样式 */
