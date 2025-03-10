@@ -1,82 +1,122 @@
 // 刷新页面操作
 window.onload = function () {
-	document.body.style.display = "none";
+  document.body.style.display = "none";
 
-	if (!sessionStorage.getItem("pageContent")) {
-		load("home");
-		setTimeout(() => {
-			document.body.style.display = "block";
-		}, 100);
-		return;
-	}
+  if (!sessionStorage.getItem("page")) {
+    load("home", "html");
+    setTimeout(() => {
+      document.body.style.display = "block";
+    }, 100);
+    return;
+  }
 
-	let page = JSON.parse(sessionStorage.getItem("pageContent")).data;
+  let page = JSON.parse(sessionStorage.getItem("page")).data;
 
-	document.getElementsByClassName("container")[0].innerHTML = page;
-	change_title(JSON.parse(sessionStorage.getItem("pageContent")).name);
+  document.getElementsByClassName("container")[0].innerHTML = page;
+  change_title(JSON.parse(sessionStorage.getItem("page")).name);
 
-	setTimeout(() => {
-		document.body.style.display = "block";
-	}, 100);
+  setTimeout(() => {
+    document.body.style.display = "block";
+  }, 100);
 };
 
-function load(name) {
-	let res = "../source/" + name + ".html";
-	document.body.style.display = "none";
+function load(name, type) {
+  let res = "../source/" + name + "." + type;
+  document.body.style.display = "none";
 
-	fetch(res)
-		.then((response) => response.text()) // 获取 HTML 内容
-		.then((data) => {
-			let content = document.querySelector(".container");
+  fetch(res)
+    .then((response) => response.text())
+    .then((data) => {
+      let content = document.querySelector(".container");
 
-			sessionStorage.setItem(
-				"pageContent",
-				JSON.stringify({ name: name, data: data })
-			); // 保存 HTML 内容到 localStorage
+      if (type === "md") {
+        let container_md = document.createElement("div");
+        container_md.classList.add("container-md");
+        content.appendChild(container_md);
+        data =
+          '<div class="container-md">' +
+          marked.parse(data) +
+          '</div class="container-md">'; // 解析 Markdown
+        console.log(data);
+      }
 
-			content.innerHTML = data; // 插入新内容
-			change_title(name);
-
-			setTimeout(() => {
-				document.body.style.display = "block";
-			}, 100);
-		})
-		.catch((error) => {
-			console.error(error);
-		});
+      content.innerHTML = data;
+      if (type === "md") {
+        add_button();
+      }
+      sessionStorage.setItem(
+        "page",
+        JSON.stringify({ name: name, data: content.innerHTML, type: type }),
+      );
+      change_title(name);
+      setTimeout(() => {
+        document.body.style.display = "block";
+      }, 100);
+    })
+    .catch((error) => console.error(error));
 }
 
+// 修改标题
 function change_title(name) {
-	document.title = title_map.find((title_map) => {
-		if (title_map.name === name) {
-			return title_map;
-		}
-	}).title;
+  document.title = title_map.find((title_map) => {
+    if (title_map.name === name) {
+      return title_map;
+    }
+  }).title;
 }
 
+// 处理代码块，添加“复制”按钮
+function add_button() {
+  document.querySelectorAll("pre").forEach((pre) => {
+    const button = `<button class="copy-btn" onclick="copy_code(this)">${copy_svg}</button>`;
+    pre.innerHTML += button;
+  });
+}
+
+// 复制代码到剪贴板
+function copy_code(button) {
+  const pre = button.parentNode;
+  const codeText = pre.innerText.trim();
+  navigator.clipboard
+    .writeText(codeText)
+    .then(() => {
+      button.innerHTML = "✔️ 已复制";
+      button.classList.add("success"); // 添加成功状态样式
+      setTimeout(() => {
+        button.innerHTML = copy_svg;
+        button.classList.remove("success"); // 移除成功状态样式
+      }, 1500);
+    })
+    .catch((err) => console.error("复制失败:", err));
+}
+
+// 切换状态栏开关
 function switch_sidebar() {
-	let sidebar = document.querySelector(".sidebar");
+  let sidebar = document.querySelector(".sidebar");
+  let sidebar_style = window.getComputedStyle(sidebar);
 
-	if (sidebar.style.left === "0px") {
-		document.querySelector(".container").style.left = "36px";
-		sidebar.style.left = "-220px";
-	} else {
-		document.querySelector(".container").style.left = "256px";
-		sidebar.style.left = "0px";
-	}
+  let sidebar_left =
+    parseFloat(sidebar_style.left) === 0
+      ? parseFloat(sidebar_style.width) * -1
+      : 0;
+
+  sidebar.style.left = `${sidebar_left}px`;
 }
 
-let title_map = [
-	{
-		name: "wallpaper",
-		title: "壁纸",
-	},
-	{
-		name: "dogcom",
-		title: "校园网配置",
-	},
-	{
-		name: "home",
-		title: "Muxirr",
-	},
+// 一些常量
+const title_map = [
+  {
+    name: "wallpaper",
+    title: "壁纸",
+  },
+  {
+    name: "dogcom",
+    title: "校园网配置",
+  },
+  {
+    name: "home",
+    title: "Muxirr",
+  },
 ];
+
+const copy_svg = `<svg><path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path></svg>`;

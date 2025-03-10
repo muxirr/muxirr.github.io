@@ -1,5 +1,5 @@
-let path = "../assets/img/";
-let img = [
+const path = "../assets/img/";
+const img = [
 	{
 		name: "castorice",
 		type: "jpg",
@@ -34,7 +34,7 @@ let img = [
 	},
 ];
 
-function change(op) {
+function change_img(op) {
 	if (op !== 1 && op !== -1) {
 		return "Op Code Error";
 	}
@@ -51,10 +51,11 @@ function change(op) {
 	imgs.alt = img[index].name;
 
 	sessionStorage.setItem(
-		"pageContent",
+		"page",
 		JSON.stringify({
 			name: "wallpaper",
 			data: document.querySelector(".container").innerHTML,
+			type: "html"
 		})
 	);
 }

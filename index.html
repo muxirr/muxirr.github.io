@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html lang="en-US">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Muxirr</title>
-	</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Muxirr</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="./style/index.css" />
+    <link rel="stylesheet" href="./style/markdown.css" />
+  </head>
 
-	<link rel="stylesheet" href="./style/index.css" />
+  <body>
+    <!-- 侧边导航栏 -->
+    <div class="sidebar">
+      <button class="back-btn" onclick="load('home','html')">主页</button>
+      <div class="nav">
+        <p onclick="load('dogcom','md')">校园网网络配置</p>
+        <p onclick="load('wallpaper','html')">壁纸</p>
+      </div>
+      <div class="sidebar-handle" onclick="switch_sidebar()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
 
-	<body>
-		<!-- 侧边导航栏 -->
-		<div class="sidebar">
-			<button class="back-btn" onclick="load('home')">主页</button>
-			<div class="nav">
-				<p onclick="load('dogcom')">校园网网络配置</p>
-				<p onclick="load('wallpaper')">壁纸</p>
-			</div>
-			<div class="sidebar-handle" onclick="switch_sidebar()">
-				<span></span>
-				<span></span>
-				<span></span>
-			</div>
-		</div>
+    <!-- 内容区域 -->
+    <div class="container"></div>
 
-		<!-- 内容区域 -->
-		<div class="container"></div>
-
-		<script src="./script/index.js"></script>
-		<script src="./script/wallpaper.js"></script>
-	</body>
+    <script src="./script/index.js"></script>
+    <script src="./script/wallpaper.js"></script>
+  </body>
 </html>
