@@ -2,7 +2,7 @@
 window.onload = function () {
   document.body.style.display = "none";
   const page = sessionStorage.getItem("page");
-  if (page.name === undefined || page.type === undefined) {
+  if (!sessionStorage.getItem("page")) {
     load("home", "html");
   } else {
     load(page.name, page.type);
