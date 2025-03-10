@@ -1,0 +1,64 @@
+<link rel="stylesheet" href="../style/dogcom.css">
+
+<div>
+	<div>
+		<h2>1.下载dogcom源码并编译</h2>
+		<p class="code">
+			git clone
+			<a href="https://github.com/mchome/dogcom">https://github.com/mchome/dogcom.git</a>
+		</p>
+		<p class="code">
+			make # Linux<br />
+			make win32=y # Windows(MinGW)<br />
+			make test=y # For testing purposes<br />
+			make force_encrypt=y # Force open encrypt mode in PPPoE
+			version
+		</p>
+		<p>windows用户要先配置MinGW，可以使用scoop安装，然后用第二条命令编译</p>
+		<p class="code">scoop install mingw</p>
+		<p>Linux用户可以直接编译，某些发行版可以直接安装</p>
+		<p>如果你不想编译，可以直接下载编译好的文件</p>
+		<a href="../assets/exe/dogcom.exe" download>Windows版下载</a>
+		<a href="../assets/exe/dogcom" download>Linux版下载</a>
+		<p>然后你可以找一个合适的位置存放程序，比如D盘下创建一个dogcom文件夹</p>
+	</div>
+	<div>
+		<h2>2.写配置文件</h2>
+		<p class="step">
+			你可以使用
+			<a href="../assets/config/dogcom.example.conf" download>dogcom.example.conf</a>
+			作为配置文件模板或者复制以下内容到一个新文件中
+		</p>
+		<p class="code">server = ''<br>
+						username = ''<br>
+						password = ''<br>
+						CONTROLCHECKSTATUS = '\x20'<br>
+						ADAPTERNUM = '\x03'<br>
+						host_ip = ''<br>
+						IPDOG = '\x01'<br>
+						host_name = 'LIYUANYUAN'<br>
+						PRIMARY_DNS = '10.10.10.10'<br>
+						dhcp_server = '0.0.0.0'<br>
+						AUTH_VERSION = '\x68\x00'<br>
+						mac = 0xf48e38e84672 <br>
+						host_os = 'Windows 10'<br>
+						KEEP_ALIVE_VERSION = '\xDC\x02'<br>
+						ror_version = True <br>
+						keepalive1_mod = True</p>
+		<p>
+			通常你需要填写server,username,password,host_ip,mac<br>
+			server是你的校园网认证服务器地址<br>
+			username和password是你的校园网账号密码 <br>
+			host_ip是你的校园网ip地址<br>
+			mac是你的网卡mac地址，用以下命令可以查看mac地址 <br>
+			<p class="code">ipconfig /all</p>
+		</p>
+	</div>
+	<div>
+		<h2>3.运行</h2>
+		<p>你可以在终端中运行，以下是命令</p>
+		<p class="code">dogcom.exe -m dhcp -l path/to/dogcom/dogcom.log -c path/to/dogcom/dogcom.conf</p>
+		<p>或者你可以下载<a href="../assets/script/dogcom.ps1" download>dogcom.ps1</a>使用脚本运行</p>
+	</div>
+</div>
+

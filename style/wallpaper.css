@@ -1,0 +1,46 @@
+body {
+	background-color: #e0e0e0;
+	font-family: Arial, sans-serif;
+	margin: 0;
+}
+.image-container {
+	position: relative;
+	display: inline-block;
+}
+img {
+	width: 100%;
+	border-radius: 5px;
+	transition: opacity 0.3s ease-in-out;
+	max-height: 96vh;
+}
+.arrow {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	background-color: rgba(0, 0, 0, 0.5);
+	color: white;
+	border: none;
+	font-size: 30px;
+	width: 60px;
+	height: 60px;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 50%;
+	display: none;
+	transition: background 0.3s;
+}
+
+.arrow:hover {
+	background-color: rgba(0, 0, 0, 0.7);
+}
+
+.left-arrow {
+	left: 10px;
+}
+.right-arrow {
+	right: 10px;
+}
+
+.image-container:hover .arrow {
+	display: block;
+}
