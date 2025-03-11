@@ -76,10 +76,10 @@ function add_button() {
 
 // 复制代码到剪贴板
 function copy_code(button) {
-  const pre = button.parentNode;
-  const codeText = pre.innerText.trim();
+  const pre = button.parentNode.children[0];
+  const code_text = pre.innerText.trim();
   navigator.clipboard
-    .writeText(codeText)
+    .writeText(code_text)
     .then(() => {
       button.innerHTML = "✔️ 已复制";
       button.classList.add("success"); // 添加成功状态样式
