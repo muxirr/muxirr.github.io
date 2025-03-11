@@ -78,17 +78,39 @@ function add_button() {
 function copy_code(button) {
   const pre = button.parentNode.children[0];
   const code_text = pre.innerText.trim();
-  navigator.clipboard
-    .writeText(code_text)
-    .then(() => {
+
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard
+      .writeText(code_text)
+      .then(() => {
+        button.innerHTML = "✔️ 已复制";
+        button.classList.add("success"); // 添加成功状态样式
+        setTimeout(() => {
+          button.innerHTML = copy_svg;
+          button.classList.remove("success"); // 移除成功状态样式
+        }, 1500);
+      })
+      .catch((err) => console.error("复制失败:", err));
+  } else {
+    // 兼容http
+    let textArea = document.createElement("textarea");
+    textArea.value = code_text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      document.execCommand("copy");
       button.innerHTML = "✔️ 已复制";
       button.classList.add("success"); // 添加成功状态样式
       setTimeout(() => {
         button.innerHTML = copy_svg;
         button.classList.remove("success"); // 移除成功状态样式
       }, 1500);
-    })
-    .catch((err) => console.error("复制失败:", err));
+    } catch (err) {
+      console.error("复制失败", err);
+    }
+
+    document.body.removeChild(textArea);
+  }
 }
 
 // 切换状态栏开关
