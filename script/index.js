@@ -36,16 +36,25 @@ function load(name, type) {
         JSON.stringify({ name: name, type: type }),
       );
 
-      if (type === "md") {
-        add_button();
-      }
-      change_title(name);
-
-      setTimeout(() => {
-        document.body.style.display = "block";
-      }, 100);
+      post_load(name, type);
     })
     .catch((error) => console.error(error));
+}
+
+function post_load(name, type) {
+  if (type === "md") {
+    add_button();
+  }
+  if (name === "wallpaper") {
+    if (!sessionStorage.getItem("img_index")) {
+      sessionStorage.setItem("img_index", 0);
+    }
+    change_img(parseInt(sessionStorage.getItem("img_index")));
+  }
+  change_title(name);
+  setTimeout(() => {
+    document.body.style.display = "block";
+  }, 100);
 }
 
 // 修改标题
