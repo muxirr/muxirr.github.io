@@ -1,7 +1,8 @@
 // 刷新页面操作
 window.onload = function () {
   document.body.style.display = "none";
-  const page = sessionStorage.getItem("page");
+  const page = JSON.parse(sessionStorage.getItem("page"));
+
   if (!sessionStorage.getItem("page")) {
     load("home", "html");
   } else {
