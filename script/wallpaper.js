@@ -21,6 +21,10 @@ const img = [
     type: "jpg",
   },
   {
+    name: "citlali",
+    type: "png",
+  },
+  {
     name: "firefly",
     type: "jpg",
   },
@@ -37,15 +41,7 @@ const img = [
     type: "jpg",
   },
   {
-    name: "nahida42",
-    type: "jpg",
-  },
-  {
     name: "nahida58",
     type: "png",
-  },
-  {
-    name: "seele",
-    type: "jpg",
   },
 ];
